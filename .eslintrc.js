@@ -15,7 +15,11 @@ module.exports = {
   plugins: ['react', '@typescript-eslint'],
   rules: {
     semi: [2, 'never'],
-    'react/jsx-filename-extension': [2, { extensions: ['.js', '.jsx', '.ts', '.tsx'] }],
+    'react/no-useless-fragment': false,
+    'react/jsx-filename-extension': [
+      2,
+      { extensions: ['.js', '.jsx', '.ts', '.tsx'] },
+    ],
     'react/function-component-definition': [
       2,
       {

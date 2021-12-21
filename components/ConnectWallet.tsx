@@ -20,22 +20,19 @@ export default function ConnectWallet() {
 
   const connect = React.useCallback(async () => {
     if (web3Modal !== null) {
-      // eslint-disable-next-line
-      const _provider = await web3Modal.connect()
-      setProvider(new ethers.providers.Web3Provider(_provider))
+      const currentProvider = await web3Modal.connect()
+      setProvider(new ethers.providers.Web3Provider(currentProvider))
 
-      _provider.on('chainChanged', (chainId: string) => {
-        // eslint-disable-next-line
+      currentProvider.on('chainChanged', (chainId: string) => {
         console.log(`new chain id: ${chainId}`)
-        setProvider(new ethers.providers.Web3Provider(_provider))
+        setProvider(new ethers.providers.Web3Provider(currentProvider))
       })
 
-      _provider.on('accountsChanged', () => {
-        setProvider(new ethers.providers.Web3Provider(_provider))
+      currentProvider.on('accountsChanged', () => {
+        setProvider(new ethers.providers.Web3Provider(currentProvider))
       })
 
-      _provider.on('disconnect', (code: number, reason: string) => {
-        // eslint-disable-next-line
+      currentProvider.on('disconnect', (code: number, reason: string) => {
         console.log(code, reason)
         disconnect()
       })
@@ -59,7 +56,7 @@ export default function ConnectWallet() {
   return (
     <button
       type="button"
-      className="uppercase md:text-lg"
+      className="font-bold uppercase md:text-lg"
       onClick={() => (isConnected ? disconnect() : connect())}
     >
       {isConnected ? 'logout' : 'connect'}
