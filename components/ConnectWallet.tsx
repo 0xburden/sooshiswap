@@ -1,58 +1,60 @@
-import React from 'react';
-import useGlobalState from '../hooks/useGlobalState';
-import useWeb3Modal from '../hooks/useWeb3Modal';
-import * as ethers from 'ethers';
+import React from 'react'
+import * as ethers from 'ethers'
+import useGlobalState from '../hooks/useGlobalState'
+import useWeb3Modal from '../hooks/useWeb3Modal'
 
 export default function ConnectWallet() {
-  const [{ provider }, { setProvider }] = useGlobalState();
-  const web3Modal = useWeb3Modal();
-  const isConnected = Boolean(web3Modal && web3Modal.cachedProvider);
+  const [{ provider }, { setProvider }] = useGlobalState()
+  const web3Modal = useWeb3Modal()
+  const isConnected = Boolean(web3Modal && web3Modal.cachedProvider)
 
   const disconnect = React.useCallback(async () => {
     if (web3Modal !== null && provider !== null) {
-      await web3Modal.clearCachedProvider();
+      await web3Modal.clearCachedProvider()
 
       setTimeout(() => {
-        window.location.reload();
-      }, 1);
+        window.location.reload()
+      }, 1)
     }
-  }, [web3Modal, provider]);
+  }, [web3Modal, provider])
 
   const connect = React.useCallback(async () => {
     if (web3Modal !== null) {
-      const provider = await web3Modal.connect();
-      setProvider(new ethers.providers.Web3Provider(provider));
+      // eslint-disable-next-line
+      const _provider = await web3Modal.connect()
+      setProvider(new ethers.providers.Web3Provider(_provider))
 
-      provider.on('chainChanged', (chainId: string) => {
-        console.log(`chain changed to ${chainId}! updating providers`);
-        setProvider(new ethers.providers.Web3Provider(provider));
-      });
+      _provider.on('chainChanged', (chainId: string) => {
+        // eslint-disable-next-line
+        console.log(`new chain id: ${chainId}`)
+        setProvider(new ethers.providers.Web3Provider(_provider))
+      })
 
-      provider.on('accountsChanged', () => {
-        console.log(`account changed!`);
-        setProvider(new ethers.providers.Web3Provider(provider));
-      });
+      _provider.on('accountsChanged', () => {
+        setProvider(new ethers.providers.Web3Provider(_provider))
+      })
 
-      provider.on('disconnect', (code: number, reason: string) => {
-        console.log(code, reason);
-        disconnect();
-      });
+      _provider.on('disconnect', (code: number, reason: string) => {
+        // eslint-disable-next-line
+        console.log(code, reason)
+        disconnect()
+      })
     }
-  }, [web3Modal, setProvider, disconnect]);
+  }, [web3Modal, setProvider, disconnect])
 
   const reconnect = React.useCallback(async () => {
     if (web3Modal === null) {
-      return;
+      return
     }
 
     if (web3Modal.cachedProvider && provider === null) {
-      connect();
+      connect()
     }
-  }, [web3Modal, connect, provider]);
+  }, [web3Modal, connect, provider])
 
   React.useEffect(() => {
-    reconnect();
-  }, [reconnect]);
+    reconnect()
+  }, [reconnect])
 
   return (
     <button
@@ -62,5 +64,5 @@ export default function ConnectWallet() {
     >
       {isConnected ? 'logout' : 'connect'}
     </button>
-  );
+  )
 }

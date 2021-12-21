@@ -1,11 +1,11 @@
-import React from 'react';
-import WalletConnectProvider from '@walletconnect/web3-provider';
-import Web3Modal from 'web3modal';
-import { INFURA_ID } from '../config';
-import { Core } from 'web3modal/dist/core';
+import React from 'react'
+import WalletConnectProvider from '@walletconnect/web3-provider'
+import Web3Modal from 'web3modal'
+import { Core } from 'web3modal/dist/core'
+import { INFURA_ID } from '../config'
 
 export default function useWeb3Modal() {
-  const [web3Modal, setWeb3Modal] = React.useState<Core | null>(null);
+  const [web3Modal, setWeb3Modal] = React.useState<Core | null>(null)
 
   const initialize = React.useCallback(() => {
     setWeb3Modal(
@@ -21,15 +21,15 @@ export default function useWeb3Modal() {
             },
           },
         },
-      })
-    );
-  }, []);
+      }),
+    )
+  }, [])
 
   React.useEffect(() => {
-    initialize();
+    initialize()
 
-    return () => setWeb3Modal(null);
-  }, [initialize]);
+    return () => setWeb3Modal(null)
+  }, [initialize])
 
-  return web3Modal;
+  return web3Modal
 }

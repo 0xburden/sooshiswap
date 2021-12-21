@@ -1,5 +1,5 @@
-import React from 'react';
-import ConnectWallet from './ConnectWallet';
+import React from 'react'
+import ConnectWallet from './ConnectWallet'
 
 export default function Header() {
   return (
@@ -7,5 +7,5 @@ export default function Header() {
       <div className="font-bold">Sooshi</div>
       <ConnectWallet />
     </div>
-  );
+  )
 }
