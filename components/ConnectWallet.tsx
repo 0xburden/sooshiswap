@@ -56,10 +56,10 @@ export default function ConnectWallet() {
   return (
     <button
       type="button"
-      className="font-bold uppercase md:text-lg"
+      className={`${isConnected ? 'bg-red-600': 'bg-green-700'} w-32 rounded-lg py-2 shadow font-bold uppercase text-sm`}
       onClick={() => (isConnected ? disconnect() : connect())}
     >
-      {isConnected ? 'logout' : 'connect'}
+      {isConnected ? 'disconnect' : 'connect'}
     </button>
   )
 }

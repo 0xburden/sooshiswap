@@ -11,7 +11,9 @@ export default function Header() {
 
       <div className="flex items-center">
         {address ? (
-          <div className="mr-4 text-sm flex-1 flex items-center">{address.slice(0, 7)}...</div>
+          <div className="mr-2 text-sm flex-1 flex items-center w-24 py-2 bg-gray-700 justify-center rounded-lg shadow-lg">
+            {address.slice(0, 7)}...
+          </div>
         ) : null}
         <ConnectWallet />
       </div>

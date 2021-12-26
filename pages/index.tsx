@@ -1,11 +1,11 @@
 import type { NextPage } from 'next'
 
-const Home: NextPage = () => {
+import SwapForm from '../components/SwapForm'
+
+export default function IndexPage<NextPage>() {
   return (
-    <>
-      <h1 className="text-5xl">YOYOYO</h1>
-    </>
+    <main className="flex items-center justify-center h-full w-full">
+      <SwapForm />
+    </main>
   )
 }
-
-export default Home
