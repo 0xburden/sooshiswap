@@ -20,6 +20,7 @@ export default function ConnectWallet() {
 
   const connect = React.useCallback(async () => {
     if (web3Modal !== null) {
+      // test
       const currentProvider = await web3Modal.connect()
       setProvider(new ethers.providers.Web3Provider(currentProvider))
 
