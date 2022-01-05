@@ -15,6 +15,7 @@ module.exports = {
   plugins: ['react', '@typescript-eslint'],
   rules: {
     semi: [2, 'never'],
+    'max-lan': ['error', { code: 80 }],
     'react/no-useless-fragment': false,
     'react/jsx-filename-extension': [
       2,

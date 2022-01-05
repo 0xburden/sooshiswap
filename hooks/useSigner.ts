@@ -3,7 +3,8 @@ import { JsonRpcSigner } from '@ethersproject/providers'
 import useGlobalState from './useGlobalState'
 
 export default function useSigner() {
-  const [signer, setSigner] = useState<JsonRpcSigner | null>(null)
+  const [signer, setSigner] =
+    useState<JsonRpcSigner | null>(null)
   const [{ provider }] = useGlobalState()
 
   const handleSigner = useCallback(async () => {
