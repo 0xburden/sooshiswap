@@ -24,6 +24,8 @@ export default function GlobalProvider({ children }: Props) {
       return { ...state, toAmount: action.payload.toAmount }
       case 'transaction deadline':
         return { ...state, txDeadline: action.payload.txDeadline }
+      case 'invert swap direction':
+        return { ...state, fromToken: state.toToken, toToken: state.fromToken }
       default:
         throw new Error('unsupported action given to GlobalProvider reducer')
     }

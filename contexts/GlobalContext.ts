@@ -13,7 +13,7 @@ export const initState: {
   provider: null,
   slippage: 0.5,
   txDeadline: 30,
-  fromToken: null,
+  fromToken: '0x82aF49447D8a07e3bd95BD0d56f35241523fBab1', // WETH address
   fromAmount: null,
   toToken: null,
   toAmount: null,
@@ -29,6 +29,7 @@ export type GlobalActions =
   | { type: 'from token'; payload: { fromToken: string } }
   | { type: 'from amount'; payload: { fromAmount: number } }
   | { type: 'transaction deadline'; payload: { txDeadline: number } }
+  | { type: 'invert swap direction'; payload?: null }
 
 const defaultDispatch: React.Dispatch<GlobalActions> = () => initState
 
